@@ -1,2 +1,2 @@
-Learning Outcomes
+## Learning Outcomes
 After the course, the student should understand the basic idea of client-server communication, and she should be able to write basic server/client applications. The student should know the differences of connection-less and connection-oriented communication (i.e., UDP and TCP) for designing performance-oriented Internet communication applications. She should know the different types of sockets and she should know which type should be applied for their specific application. The student should know the relationship between sockets and application layer protocols. At a higher level, the student should know how to design synchronous and asynchronous server applications and be able to use certain IPC techniques.
