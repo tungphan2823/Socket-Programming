@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+  <head><title>WebSocket</title></head>
+  <body onunload="teardown()">
+    <script>
+	  function teardown() {
+		if (ws.readyState === 1) ws.close()
+	  }
+	  var ws = new WebSocket("ws://127.0.0.1:11111/"),
+		  messages = document.createElement('ul');
+	  const countdisplay = document.createElement('p')
+	  countdisplay.style = 'font-size: 200px'
+	  let lastTime = new Date().getTime();
+	  let red = 0, green = 0, black = 0
+      ws.onmessage = function (event) {
+	    const time = new Date().getTime();
+		const diff = time - lastTime
+		lastTime = time;
+        var messages = document.getElementsByTagName('ul')[0]
+		if (messages.childElementCount > 10) {
+			messages.removeChild(messages.children[0])
+		}
+		
+        message = document.createElement('li'),
+        content = document.createTextNode(`${event.data} ${diff / 1000}`);
+        message.appendChild(content);
+		if (diff < 1500) {
+			red++;
+			message.style.color = '#FF0000'
+		} else if (diff > 3500) {
+			green++;
+			message.style.color = '#00FF00'
+		} else {
+			black++;
+		}
+        messages.appendChild(message);
+		countdisplay.innerHTML = `<span>${black} </span><span style="color: #FF0000">${red} </span><span style="color: #00FF00">${green} </span>`
+      };
+      document.body.appendChild(messages);
+	  document.body.appendChild(countdisplay);
+    </script>
+  </body>
+</html>
